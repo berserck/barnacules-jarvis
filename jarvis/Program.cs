@@ -39,12 +39,18 @@ namespace jarvis
         Console.WriteLine("Available Mem: {0}MB", currentAvailableMemory);
 
 
-        string cpuLoadVocalMessage = String.Format("The current CPU load is {0}", currentCPUPercentage);
-        string memVocalMessage = String.Format("You currently have {0} megabytes of memory available", currentAvailableMemory);
+        if (currentCPUPercentage > 80)
+        {
+          string cpuLoadVocalMessage = String.Format("The current CPU load is {0}", currentCPUPercentage);
+          synth.Speak(cpuLoadVocalMessage);
 
-        synth.Speak(cpuLoadVocalMessage);
-        synth.Speak(memVocalMessage);
+        }
 
+        if (currentAvailableMemory < 1024)
+        {
+          string memVocalMessage = String.Format("You currently have {0} megabytes of memory available", currentAvailableMemory);
+          synth.Speak(memVocalMessage);
+        }
         Thread.Sleep(1000);
 
       }
