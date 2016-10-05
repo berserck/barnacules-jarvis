@@ -17,7 +17,7 @@ namespace jarvis
     static void Main(string[] args)
     {
       // This will greet the user in the default voice
-      Speak("Welcome to jarvis version one point oh", VoiceGender.Neutral);
+      Speak("Welcome to jarvis version one point oh", VoiceGender.Neutral );
 
 
       #region My Performance Counters
@@ -89,6 +89,18 @@ namespace jarvis
     {
       synth.SelectVoiceByHints(voiceGender);
       synth.Speak(message);
+    }
+
+    /// <summary>
+    /// Speaks with a selected voice at selected speed
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="voiceGender"></param>
+    /// <param name="rate"></param>
+    public static void Speak(string message, VoiceGender voiceGender, int rate)
+    {
+      synth.Rate = rate;
+      Speak(message, voiceGender);
     }
   }
 }
