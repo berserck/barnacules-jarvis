@@ -44,7 +44,7 @@ namespace jarvis
         );
       Console.WriteLine(systemUptimeMessage);
 
-      Speak(systemUptimeMessage, VoiceGender.Male);
+      Speak(systemUptimeMessage, VoiceGender.Male); 
       // infinite loop
       while (true)
       {
@@ -55,7 +55,7 @@ namespace jarvis
         Console.WriteLine("CPU Load     : {0}%", currentCPUPercentage);
         Console.WriteLine("Available Mem: {0}MB", currentAvailableMemory);
 
-
+        #region CPU logic
         if (currentCPUPercentage > 80)
         {
           if (currentCPUPercentage == 100)
@@ -69,7 +69,7 @@ namespace jarvis
             Speak(cpuLoadVocalMessage, VoiceGender.Male);
           }
         }
-
+        #endregion
         if (currentAvailableMemory < 1024)
         {
           string memVocalMessage = String.Format("You currently have {0} megabytes of memory available", currentAvailableMemory);
@@ -101,6 +101,19 @@ namespace jarvis
     {
       synth.Rate = rate;
       Speak(message, voiceGender);
+    }
+
+    /// <summary>
+    /// Opens website
+    /// </summary>
+    /// <param name="URL"></param>
+    public static void OpenWebsite(string URL)
+    {
+      Process p1 = new Process();
+      p1.StartInfo.FileName = "chrome.exe";
+      p1.StartInfo.Arguments = URL;
+      p1.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+      p1.Start();
     }
   }
 }
