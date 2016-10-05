@@ -6,6 +6,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Threading;
 
+using System.Speech.Synthesis;
 
 namespace jarvis
 {
@@ -16,6 +17,10 @@ namespace jarvis
       //This will pull the current CPU load in percentage
       PerformanceCounter perfCPUCount = new PerformanceCounter("Processor Information", "% Processor Time", "_Total");
       PerformanceCounter perfMemCount = new PerformanceCounter("Memory", "Available MBytes");
+
+
+      SpeechSynthesizer synth = new SpeechSynthesizer();
+      synth.Speak("Hello how are you today!");
 
       // infinite loop
       while (true)
