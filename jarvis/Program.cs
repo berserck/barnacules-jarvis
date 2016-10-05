@@ -16,17 +16,17 @@ namespace jarvis
     {
       // This will greet the user in the default voice
       SpeechSynthesizer synth = new SpeechSynthesizer();
-      synth.Speak("Welcome to jarvis version one point 0");
-      
-      
-      
+      synth.Speak("Welcome to jarvis version one point o");
+
+
+      #region My Performance Counters
       //This will pull the current CPU load in percentage
       PerformanceCounter perfCPUCount = new PerformanceCounter("Processor Information", "% Processor Time", "_Total");
       //This will pull the current Memory available in MB
       PerformanceCounter perfMemCount = new PerformanceCounter("Memory", "Available MBytes");
       // This wuill get system uptime in s
-      PerformanceCounter perfUptimeCount = new PerformanceCounter("System", "System Up Timek");
-
+      PerformanceCounter perfUptimeCount = new PerformanceCounter("System", "System Up Time");
+      #endregion
 
       // infinite loop
       while (true)
