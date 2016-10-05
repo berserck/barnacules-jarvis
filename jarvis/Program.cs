@@ -16,7 +16,7 @@ namespace jarvis
     {
       // This will greet the user in the default voice
       SpeechSynthesizer synth = new SpeechSynthesizer();
-      synth.Speak("Welcome to jarvis version one point o");
+      //synth.Speak("Welcome to jarvis version one point o");
 
 
       #region My Performance Counters
@@ -31,9 +31,21 @@ namespace jarvis
       // infinite loop
       while (true)
       {
+
+        int currentCPUPercentage =  (int)perfCPUCount.NextValue();
+        int currentAvailableMemory = (int)perfMemCount.NextValue();
+
+        Console.WriteLine("CPU Load     : {0}%", currentCPUPercentage);
+        Console.WriteLine("Available Mem: {0}MB", currentAvailableMemory);
+
+
+        string cpuLoadVocalMessage = String.Format("The current CPU load is {0}", currentCPUPercentage);
+        string memVocalMessage = String.Format("You currently have {0} megabytes of memory available", currentAvailableMemory);
+
+        synth.Speak(cpuLoadVocalMessage);
+        synth.Speak(memVocalMessage);
+
         Thread.Sleep(1000);
-        Console.WriteLine("CPU Load: {0}%", perfCPUCount.NextValue());
-        Console.WriteLine("Available Mem: {0}MB", perfMemCount.NextValue());
 
       }
     }
