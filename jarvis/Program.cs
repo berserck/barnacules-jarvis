@@ -12,12 +12,12 @@ namespace jarvis
 {
   class Program
   {
+      private static SpeechSynthesizer synth = new SpeechSynthesizer();
+
     static void Main(string[] args)
     {
       // This will greet the user in the default voice
-      SpeechSynthesizer synth = new SpeechSynthesizer();
-      synth.SelectVoiceByHints(VoiceGender.Neutral);
-      synth.Speak("Welcome to jarvis version one point oh");
+      Speak("Welcome to jarvis version one point oh", VoiceGender.Neutral);
 
 
       #region My Performance Counters
@@ -44,7 +44,7 @@ namespace jarvis
         );
       Console.WriteLine(systemUptimeMessage);
 
-      synth.Speak(systemUptimeMessage);
+      Speak(systemUptimeMessage, VoiceGender.Male);
       // infinite loop
       while (true)
       {
@@ -60,27 +60,35 @@ namespace jarvis
         {
           if (currentCPUPercentage == 100)
           {
-            synth.SelectVoiceByHints(VoiceGender.Female);
             string cpuLoadVocalMessage = String.Format("Warning: CPU at max", currentCPUPercentage);
-            synth.Speak(cpuLoadVocalMessage);
+            Speak(cpuLoadVocalMessage, VoiceGender.Female);
           }
           else
           {
-            synth.SelectVoiceByHints(VoiceGender.Male);
             string cpuLoadVocalMessage = String.Format("The current CPU load is {0}", currentCPUPercentage);
-            synth.Speak(cpuLoadVocalMessage);
+            Speak(cpuLoadVocalMessage, VoiceGender.Male);
           }
         }
 
         if (currentAvailableMemory < 1024)
         {
-          synth.SelectVoiceByHints(VoiceGender.Male);
           string memVocalMessage = String.Format("You currently have {0} megabytes of memory available", currentAvailableMemory);
-          synth.Speak(memVocalMessage);
+          Speak(memVocalMessage, VoiceGender.Male);
         }
         Thread.Sleep(1000);
 
       }
+    }
+
+    /// <summary>
+    /// Speaks with a selected voice
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="voiceGender"></param>
+    public static void Speak(string message, VoiceGender voiceGender)
+    {
+      synth.SelectVoiceByHints(voiceGender);
+      synth.Speak(message);
     }
   }
 }
